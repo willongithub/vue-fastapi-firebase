@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "back"
+version = "0.1.0"
+description = ""
+authors = ["liam@macos <me@macos.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi-users = {extras = ["beanie"], version = "^10.4.0"}
+
+
+[tool.poetry.group.dev.dependencies]
+coverage = "^7.2.1"
+pytest = "^7.2.2"
+tox = "^4.4.6"
+black = "^23.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
