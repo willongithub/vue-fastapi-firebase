@@ -6,15 +6,13 @@ from fastapi import (
     Request,
     status,
     UploadFile,
+    Depends,
 )
-from fastapi.responses import JSONResponse, HTMLResponse, Depends
+from fastapi.responses import JSONResponse, HTMLResponse
 from back.config.model import Item
+from back.utils import common_parameters
 
 router = APIRouter()
-
-
-async def common_parameters(q: str = None, skip: int = 0, limit: int = 100):
-    return {"q": q, "skip": skip, "limit": limit}
 
 
 @router.post("/items/", response_model=Item, summary="Create item")

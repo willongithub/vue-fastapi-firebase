@@ -2,12 +2,13 @@
 name = "back"
 version = "0.1.0"
 description = ""
-authors = ["liam@macos <me@macos.com>"]
+authors = ["Liam <liam@liam.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
 fastapi-users = {extras = ["beanie"], version = "^10.4.0"}
+uvicorn = {extras = ["standard"], version = "^0.21.0"}
 
 
 [tool.poetry.group.dev.dependencies]
