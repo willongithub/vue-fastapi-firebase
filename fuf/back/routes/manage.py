@@ -10,7 +10,8 @@ from fastapi import (
 )
 from fastapi.responses import JSONResponse, HTMLResponse
 from back.utils import common_parameters
-from back.config.model import UserIn, UserOut
+from back.config.models import UserIn, UserOut
+
 
 router = APIRouter()
 

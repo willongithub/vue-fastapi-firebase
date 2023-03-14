@@ -9,8 +9,9 @@ from fastapi import (
     Depends,
 )
 from fastapi.responses import JSONResponse, HTMLResponse
-from back.config.model import Item
+from back.config.models import Item
 from back.utils import common_parameters
+
 
 router = APIRouter()
 
