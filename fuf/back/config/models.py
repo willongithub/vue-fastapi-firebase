@@ -1,3 +1,5 @@
+from enum import Enum
+
 from pydantic import BaseModel
 
 
@@ -7,17 +9,24 @@ class Item(BaseModel):
     tag: str
 
 
+class UserType(str, Enum):
+    admin = "admin"
+    coordinator = "coordinator"
+    participant = "participant"
+
+
 class UserBase(BaseModel):
-    username: str
-    email: str
-    full_name: str = None
+    identifier: str
+    group: str | None = None
+    type: UserType | None = UserType.participant
+    active: bool | None = True
 
 
 class UserIn(UserBase):
     password: str
 
 
-class UserOut(UserBase):
+class User(UserBase):
     pass
 
 

@@ -2,29 +2,31 @@ from fastapi import (
     APIRouter,
     BackgroundTasks,
     Body,
+    Depends,
     HTTPException,
     Request,
-    status,
     UploadFile,
-    Depends,
+    status,
 )
-from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
+
+from back.app import oauth2_scheme
 from back.config.models import Item
 from back.utils import common_parameters
-
 
 router = APIRouter()
 
 
 @router.post("/items/", response_model=Item, summary="Create item")
 async def create_item(
+    token: str = Depends(oauth2_scheme),
     item: Item = Body(
         example={
             "name": "string",
             "description": "string",
             "tag": "string",
         }
-    )
+    ),
 ):
     """
     Create an item with all the information:
@@ -36,5 +38,8 @@ async def create_item(
 
 
 @router.get("/items/")
-async def read_items(commons: dict = Depends(common_parameters)):
+async def read_items(
+    token: str = Depends(oauth2_scheme),
+    commons: dict = Depends(common_parameters),
+):
     return {"q": commons.q, "skip": commons.skip, "limit": commons.limit}

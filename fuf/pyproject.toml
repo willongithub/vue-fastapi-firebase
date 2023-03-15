@@ -7,8 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-fastapi-users = {extras = ["beanie"], version = "^10.4.0"}
 uvicorn = {extras = ["standard"], version = "^0.21.0"}
+beanie = "^1.17.0"
+fastapi = "^0.94.1"
+python-multipart = "^0.0.6"
 
 
 [tool.poetry.group.dev.dependencies]

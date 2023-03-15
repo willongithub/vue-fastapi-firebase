@@ -11,6 +11,7 @@ from fastapi import (
 from fastapi.responses import JSONResponse, HTMLResponse
 from back.utils import common_parameters
 from back.config.models import UserIn, UserOut
+from back.app import oauth2_scheme
 
 
 router = APIRouter()
