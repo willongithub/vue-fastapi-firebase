@@ -9,15 +9,16 @@ from fastapi import (
     Depends,
 )
 from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.security import OAuth2PasswordBearer
 from back.utils import common_parameters
-from back.config.models import UserIn, UserOut
-from back.app import oauth2_scheme
+from back.config.models import UserIn, User
 
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 router = APIRouter()
 
 
-@router.post("/users/", response_model=UserOut, summary="Signup user")
+@router.post("/users/", response_model=User, summary="Signup user")
 async def add_user(
     user: UserIn = Body(
         example={

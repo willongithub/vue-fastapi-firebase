@@ -16,7 +16,7 @@ class UserType(str, Enum):
 
 
 class UserBase(BaseModel):
-    identifier: str
+    username: str
     group: str | None = None
     type: UserType | None = UserType.participant
     active: bool | None = True
@@ -32,3 +32,12 @@ class User(UserBase):
 
 class UserInDB(UserBase):
     hashed_password: str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str | None = None

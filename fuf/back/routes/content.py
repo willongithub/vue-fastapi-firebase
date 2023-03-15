@@ -9,11 +9,12 @@ from fastapi import (
     status,
 )
 from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.security import OAuth2PasswordBearer
 
-from back.app import oauth2_scheme
 from back.config.models import Item
 from back.utils import common_parameters
 
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 router = APIRouter()
 
 

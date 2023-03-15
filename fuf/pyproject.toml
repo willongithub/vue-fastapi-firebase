@@ -11,7 +11,8 @@ uvicorn = {extras = ["standard"], version = "^0.21.0"}
 beanie = "^1.17.0"
 fastapi = "^0.94.1"
 python-multipart = "^0.0.6"
-
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 
 [tool.poetry.group.dev.dependencies]
 coverage = "^7.2.1"

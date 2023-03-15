@@ -1,11 +1,9 @@
 from fastapi import FastAPI
-from fastapi.security import OAuth2PasswordBearer
 
 from back.routes.content import router as content
 from back.routes.index import router as index
 from back.routes.manage import router as manage
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 api = FastAPI()
 
