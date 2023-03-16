@@ -1,0 +1,73 @@
+version: '3.9'
+
+volumes:
+  database_mongo:
+
+
+services:
+
+  admin:
+    image: admin
+    build:
+      context: ./admin
+      args:
+        version: ${VERSION_ADMIN}
+    env_file: .env
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.admin.tls=true
+      - traefik.http.routers.admin.rule=Host(`admin.domain.com`)
+
+  back:
+    image: back
+    build:
+      context: ./back
+      args:
+        version: ${VERSION_API}
+    shm_size: '1gb'
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.api.tls=true
+      - traefik.http.routers.api.rule=Host(`api.domain.com`)
+    ports:
+      - 8848:8848
+    depends_on:
+      - mongo
+    env_file: .env
+    volumes:
+      - ./back:/app
+
+  mongo:
+    image: mongo:latest
+    env_file: .env
+    ports:
+      - 27017:27017
+    volumes:
+      - database_mongo:/data/db
+
+  mongo-admin:
+    image: mongo-express
+    build:
+      context: https://github.com/mongo-express/mongo-express.git
+    ports:
+      - 8081:8000
+    depends_on:
+      - mongo
+    env_file: .env
+
+  proxy:
+    image: traefik:latest
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8082:8080"
+    volumes:
+      - ./back/traefik:/etc/traefik:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  whoami:
+    image: traefik/whoami:latest
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.whoami.tls=true
+      - traefik.http.routers.whoami.rule=Host(`whoami.domain.com`)
